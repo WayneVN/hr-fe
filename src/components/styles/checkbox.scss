@@ -1,0 +1,25 @@
+@import './colors.scss';
+@import './var.scss';
+
+.checkbox-warp {
+  display: flex;
+  justify-content: space-between;
+  .item {
+    color: #333;
+    font-size: 16px;
+    padding: 7px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 16px;
+    line-height: 16px;
+    box-sizing: border-box;
+  }
+  .item-active {
+    @extend .item;
+    color: #fff;
+    background: $cyan;
+    border: 1px solid $cyan;
+    border: none;
+  }
+}

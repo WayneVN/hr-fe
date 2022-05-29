@@ -1,3 +1,8 @@
+@import './components/styles/var.scss';
+
+* {
+  box-sizing: border-box;
+}
 #app {
   display: flex;
   align-content: center;
@@ -6,7 +11,8 @@
 }
 
 .main-page {
-  width: 414px;
-  height: 902px;
+  width: $width;
+  height: $height;
   display: flex;
+  flex-direction: column;
 }

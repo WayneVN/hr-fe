@@ -1,0 +1,47 @@
+@import './colors.scss';
+
+#map {
+  width: 100%;
+  height: 812px;
+}
+
+.map-warp{
+  width: 100%;
+  height: 812px;
+  position: relative;
+  .filter-option-warp {
+    display: flex;
+    position: absolute;
+    width: 270px;
+    height: 38px;
+    top: 16px;
+    left: 50%;
+    margin-left: -135px;
+    background-color: #fff;
+    z-index: 1;
+    border-radius: 6px;
+    overflow: hidden;
+    .btn1 {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 38px;
+      font-weight: 600;
+      color: #fff;
+      font-size: 16px;
+      background: $cyan;
+      width: 96px;
+      cursor: pointer;
+    }
+    .btn2 {
+      @extend .btn1;
+      background: $cyan1;
+      width: 67px;
+    }
+    .btn3 {
+      @extend .btn1;
+      color: #808080;
+      background: #FFF;
+    }
+  }
+}

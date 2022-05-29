@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
 
-export const mainStore = defineStore('main', {
+export const useFiltertore = defineStore('filter', {
   state: () => {
     return {
-      msg: 'hello'
+      isVisible: !false
     }
   },
 
   getters: {},
-  actions: {}
+  actions: {
+    trigger() {
+      this.isVisible = !this.isVisible
+    }
+  }
 })

@@ -10,12 +10,20 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@fawmi/vue-google-maps": "^0.9.67",
+    "@googlemaps/js-api-loader": "^1.14.3",
+    "@vueform/slider": "^2.0.10",
+    "install": "^0.13.0",
     "normalize.css": "^8.0.1",
     "pinia": "^2.0.14",
+    "typescript-language-server": "^0.10.1",
     "vue": "^3.2.25",
-    "vue-router": "4"
+    "vue-histogram-slider": "^0.3.8",
+    "vue-router": "4",
+    "vue-slider-component": "^3.2.15"
   },
   "devDependencies": {
+    "@types/google.maps": "^3.49.1",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "@vitejs/plugin-vue": "^2.3.3",

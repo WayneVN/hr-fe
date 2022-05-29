@@ -1,11 +1,23 @@
 import { defineComponent } from 'vue'
-import { mainStore } from '@/store/index'
+import { mapState, mapStores } from 'pinia'
+import { useFiltertore } from '@/store/index'
+import { Search, SearchTool, Map, Modal } from '@/components'
 
 export default defineComponent({
-  name: 'Home',
-  setup() {
-    /* const s = mainStore()
-     * console.log(s.msg) */
-    return () => <div>home</div>
+  name: 'HomePage',
+  computed: {
+    ...mapStores(useFiltertore),
+    ...mapState(useFiltertore, ['isVisible'])
+  },
+  render() {
+    return (
+      <>
+        <Search />
+        <SearchTool />
+        <Map />
+        <Slider></Slider>
+        {this.isVisible ? <Modal /> : null}
+      </>
+    )
   }
 })

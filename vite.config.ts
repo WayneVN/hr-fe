@@ -6,8 +6,13 @@ import vueJsx from "@vitejs/plugin-vue-jsx"
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [
-    vue(),
-    vueJsx()
+    vue({
+      reactivityTransform: true,
+      customElement: true
+    }),
+    vueJsx({
+      transformOn: true
+    })
   ],
   resolve: {
     alias: {
