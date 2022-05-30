@@ -1,4 +1,6 @@
-import { mapState, mapStores } from 'pinia'
+import { computed } from "vue"
+import { mapStores } from 'pinia'
+import numeral from 'numeral';
 import { useFiltertore } from '@/store/index'
 import { Checkbox } from './checkbox'
 import Slider from '@/components/slider.vue'
@@ -6,9 +8,6 @@ import './styles/modal.scss'
 
 export const Modal = {
   name: 'modal-component',
-  /* components: {
-   *   Slider
-   * }, */
   data() {
     return {
       value: 1
@@ -17,10 +16,26 @@ export const Modal = {
   props: [],
   computed: {
     ...mapStores(useFiltertore),
-    ...mapState(useFiltertore, ['isVisible'])
   },
-  methods: {},
-  setup() {},
+  methods: {
+    clear() {
+      this.filterStore.clear()
+    },
+    apply() {
+      this.filterStore.trigger()
+      alert('success')
+    }
+  },
+
+  setup() {
+    const store = useFiltertore()
+    const form = computed(() => store.form)
+
+    return {
+      form,
+    }
+  },
+
   render() {
     return (
       <div class="modal-warp">
@@ -32,12 +47,17 @@ export const Modal = {
           <div class="panel-body">
             <div class="row">
               <h1>Price range</h1>
-              <span class="row-subtitle">$700,000 - $4,000,000</span>
+              <span class="row-subtitle">
+                ${
+                  numeral((this.form.priceRange[0] ?? 0) * 1000).format('0,0')
+                } - ${
+                  numeral((this.form.priceRange[1] ?? 0) * 1000).format('0,0')
+                }
+              </span>
               <Slider />
             </div>
             <div class="row">
               <h1>Description Contains Keywords</h1>
-
               <input
                 class="row-input"
                 type="text"
@@ -47,20 +67,34 @@ export const Modal = {
             </div>
             <div class="row">
               <h1>Bedrooms</h1>
-              <Checkbox type="multi" list={['0', '1', '2', '3', '4', '5+']} />
+              <Checkbox
+                type="multi"
+                name="Bedrooms"
+                list={['0', '1', '2', '3', '4', '5+']} />
             </div>
             <div class="row">
               <h1>Bathroom</h1>
-              <Checkbox list={['1+', '2+', '3+', '4+', '5+']} />
+              <Checkbox
+                name="Bathroom"
+                list={['1+', '2+', '3+', '4+', '5+']}
+              />
             </div>
             <div class="row">
               <h1>Garage/Parking</h1>
-              <Checkbox list={['1+', '2+', '3+', '4+', '5+']} />
+              <Checkbox
+                list={['1+', '2+', '3+', '4+', '5+']}
+                name="Garage"
+              />
             </div>
+
           </div>
           <div class="panel-foot">
-            <div class="btn">Close</div>
-            <div class="btn">Apply</div>
+            <div class="btn" onClick={this.clear}>
+              Clear
+            </div>
+            <div class="btn" onClick={this.apply}>
+              Apply
+            </div>
           </div>
         </div>
       </div>

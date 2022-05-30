@@ -1,39 +1,43 @@
-import { reactive } from 'vue'
+import { computed } from "vue"
+import { mapStores, mapState, storeToRefs } from 'pinia'
+import { useFiltertore } from '@/store/index'
 import './styles/checkbox.scss'
 
 export const Checkbox = {
   name: 'checkbox-component',
-  props: ['list', 'type'],
-  methods: {
-    handleClickItem(item) {
-      const has = this.counts.indexOf(item)
-      if (this.type === 'multi') {
-        if (has === -1) {
-          this.counts.push(item)
-        } else {
-          this.counts = this.counts.filter((i) => i !== item)
-        }
-      } else {
-        this.counts = [item]
-      }
-    },
-    reset(item) {
-      this.counts = []
+  props: ['list', 'type', 'name'],
+  computed: {
+    ...mapStores(useFiltertore),
+  },
+  setup() {
+    const store = useFiltertore()
+    const form = computed(() => store.form)
+
+    return {
+      form,
+      store
     }
   },
-  data() {
-    return { counts: [] }
+
+  methods: {
+    handleClickItem(item) {
+      this.store.updateItem(item, this.name, this.type)
+    },
+    reset() {
+      this.store.setField(this.name, [])
+    }
   },
-  setup() {},
+
   render() {
+    const obj = this.form?.[this.name];
     return (
       <div class="checkbox-warp">
-        <div onClick={this.reset} class={!this.counts.length ? 'item-active' : 'item'}>
+        <div onClick={this.reset} class={!obj.length ? 'item-active' : 'item'}>
           any
         </div>
         {this.list.map((i: string) => (
           <div
-            class={this.counts.includes(i) ? 'item-active' : 'item'}
+            class={obj.includes(i) ? 'item-active' : 'item'}
             onClick={(e) => this.handleClickItem(i)}
           >
             {i}

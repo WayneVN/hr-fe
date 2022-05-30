@@ -3,11 +3,13 @@ import { mapState, mapStores } from 'pinia'
 import { useFiltertore } from '@/store/index'
 import { Search, SearchTool, Map, Modal } from '@/components'
 
+
+
 export default defineComponent({
-  name: 'HomePage',
+  name: 'home-page',
   computed: {
     ...mapStores(useFiltertore),
-    ...mapState(useFiltertore, ['isVisible'])
+    ...mapState(useFiltertore, ['isVisible']),
   },
   render() {
     return (
@@ -15,8 +17,9 @@ export default defineComponent({
         <Search />
         <SearchTool />
         <Map />
-        <Slider></Slider>
-        {this.isVisible ? <Modal /> : null}
+        {
+          this.isVisible ? <Modal /> : null
+        }
       </>
     )
   }
