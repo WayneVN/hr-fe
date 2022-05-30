@@ -1,5 +1,5 @@
 import { computed } from "vue"
-import { mapStores } from 'pinia'
+import { mapStores, storeToRefs } from 'pinia'
 import numeral from 'numeral';
 import { useFiltertore } from '@/store/index'
 import { Checkbox } from './checkbox'
@@ -14,9 +14,6 @@ export const Modal = {
     }
   },
   props: [],
-  computed: {
-    ...mapStores(useFiltertore),
-  },
   methods: {
     clear() {
       this.filterStore.clear()
@@ -29,9 +26,9 @@ export const Modal = {
 
   setup() {
     const store = useFiltertore()
-    const form = computed(() => store.form)
-
+    const { form } = storeToRefs(store)
     return {
+      filterStore: store,
       form,
     }
   },

@@ -7,15 +7,14 @@ export const Checkbox = {
   name: 'checkbox-component',
   props: ['list', 'type', 'name'],
   computed: {
-    ...mapStores(useFiltertore),
+    //...mapStores(useFiltertore),
   },
   setup() {
     const store = useFiltertore()
-    const form = computed(() => store.form)
-
+    const { form } = storeToRefs(store)
     return {
+      store,
       form,
-      store
     }
   },
 
@@ -30,6 +29,7 @@ export const Checkbox = {
 
   render() {
     const obj = this.form?.[this.name];
+
     return (
       <div class="checkbox-warp">
         <div onClick={this.reset} class={!obj.length ? 'item-active' : 'item'}>

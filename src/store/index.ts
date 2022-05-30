@@ -50,7 +50,7 @@ export const useFiltertore = defineStore('filter', {
       const has = obj.indexOf(item)
       if (type === 'multi') {
         if (has === -1) {
-          this.form[name].push(item)
+          this.form[name] = [...this.form[name], item]
         } else {
           this.form[name] = this.form[name].filter((i) => i !== item)
         }
@@ -63,6 +63,7 @@ export const useFiltertore = defineStore('filter', {
 
     clear() {
       console.log('debug: xxxxxxx')
+      this.$reset()
       this.$reset()
       localStorage.removeItem(CACHE)
       this.isVisible = true

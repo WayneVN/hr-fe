@@ -1,33 +1,26 @@
 <template>
   <Slider
-    v-model="value"
+    v-model="form.priceRange"
     @change="handleChange"
   />
 </template>
 
 <script>
  import Slider from '@vueform/slider'
- import { mapState, mapStores } from 'pinia'
+ import { mapState, mapStores, storeToRefs } from 'pinia'
  import { useFiltertore } from '@/store/index'
  import { computed } from "vue"
 
 
  export default {
    components: { Slider },
-   data() {
-     console.log('debug: ', this.form.priceRange, '------------------')
-     return {
-       value: this.form.priceRange
-     }
-   },
    setup() {
-    const store = useFiltertore()
-    const form = computed(() => store.form)
-
-    return {
-      form,
-      store
-    }
+     const store = useFiltertore()
+     const { form } = storeToRefs(store)
+     return {
+       form,
+       store
+     }
    },
    computed: {
      ...mapStores(useFiltertore),
