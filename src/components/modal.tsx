@@ -14,6 +14,15 @@ export const Modal = {
     }
   },
   props: [],
+  setup() {
+    const store = useFiltertore()
+    const { form } = storeToRefs(store)
+    return {
+      filterStore: store,
+      form,
+    }
+  },
+
   methods: {
     clear() {
       this.filterStore.clear()
@@ -21,15 +30,6 @@ export const Modal = {
     apply() {
       this.filterStore.trigger()
       alert('success')
-    }
-  },
-
-  setup() {
-    const store = useFiltertore()
-    const { form } = storeToRefs(store)
-    return {
-      filterStore: store,
-      form,
     }
   },
 

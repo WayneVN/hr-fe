@@ -13,7 +13,7 @@ export type InitState = {
 const CACHE = 'cache';
 
 const initState: InitState = {
-  isVisible: !false,
+  isVisible: false,
   form: {
     priceRange: [10, 40],
     Bedrooms: [],
@@ -62,12 +62,9 @@ export const useFiltertore = defineStore('filter', {
     },
 
     clear() {
-      console.log('debug: xxxxxxx')
-      this.$reset()
-      this.$reset()
       localStorage.removeItem(CACHE)
+      this.$reset();
       this.isVisible = true
-      console.log('debug: thisthisthis', this.form)
     }
   }
 })
