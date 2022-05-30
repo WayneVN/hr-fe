@@ -1,4 +1,4 @@
-import { computed } from "vue"
+import { computed } from 'vue'
 import { mapStores, mapState, storeToRefs } from 'pinia'
 import { useFiltertore } from '@/store/index'
 import './styles/checkbox.scss'
@@ -14,7 +14,7 @@ export const Checkbox = {
     const { form } = storeToRefs(store)
     return {
       store,
-      form,
+      form
     }
   },
 
@@ -28,7 +28,7 @@ export const Checkbox = {
   },
 
   render() {
-    const obj = this.form?.[this.name];
+    const obj = this.form?.[this.name]
 
     return (
       <div class="checkbox-warp">

@@ -1,16 +1,16 @@
 import { defineStore } from 'pinia'
 
 export type InitState = {
-  isVisible: boolean;
+  isVisible: boolean
   form: {
-    priceRange: number[];
-    Bedrooms: string[];
-    Bathroom: string[];
-    Garage: string[];
+    priceRange: number[]
+    Bedrooms: string[]
+    Bathroom: string[]
+    Garage: string[]
   }
 }
 
-const CACHE = 'cache';
+const CACHE = 'cache'
 
 const initState: InitState = {
   isVisible: false,
@@ -18,7 +18,7 @@ const initState: InitState = {
     priceRange: [10, 40],
     Bedrooms: [],
     Bathroom: [],
-    Garage: [],
+    Garage: []
   }
 }
 
@@ -27,8 +27,8 @@ export const useFiltertore = defineStore('filter', {
     return {
       ...initState,
       form: {
-        ...(initState.form),
-        ...(JSON.parse(localStorage.getItem(CACHE) ?? '{}'))
+        ...initState.form,
+        ...JSON.parse(localStorage.getItem(CACHE) ?? '{}')
       }
     }
   },
@@ -45,7 +45,7 @@ export const useFiltertore = defineStore('filter', {
     },
 
     updateItem(item: string[], name: string, type: string) {
-      const obj = this.form?.[name];
+      const obj = this.form?.[name]
 
       const has = obj.indexOf(item)
       if (type === 'multi') {
@@ -58,12 +58,11 @@ export const useFiltertore = defineStore('filter', {
         this.form[name] = [item]
       }
       localStorage.setItem(CACHE, JSON.stringify(this.form))
-
     },
 
     clear() {
       localStorage.removeItem(CACHE)
-      this.$reset();
+      this.$reset()
       this.isVisible = true
     }
   }

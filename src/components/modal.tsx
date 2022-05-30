@@ -1,6 +1,6 @@
-import { computed } from "vue"
+import { computed } from 'vue'
 import { mapStores, storeToRefs } from 'pinia'
-import numeral from 'numeral';
+import numeral from 'numeral'
 import { useFiltertore } from '@/store/index'
 import { Checkbox } from './checkbox'
 import Slider from '@/components/slider.vue'
@@ -19,7 +19,7 @@ export const Modal = {
     const { form } = storeToRefs(store)
     return {
       filterStore: store,
-      form,
+      form
     }
   },
 
@@ -45,11 +45,8 @@ export const Modal = {
             <div class="row">
               <h1>Price range</h1>
               <span class="row-subtitle">
-                ${
-                  numeral((this.form.priceRange[0] ?? 0) * 1000).format('0,0')
-                } - ${
-                  numeral((this.form.priceRange[1] ?? 0) * 1000).format('0,0')
-                }
+                ${numeral((this.form.priceRange[0] ?? 0) * 1000).format('0,0')} - $
+                {numeral((this.form.priceRange[1] ?? 0) * 1000).format('0,0')}
               </span>
               <Slider />
             </div>
@@ -64,26 +61,16 @@ export const Modal = {
             </div>
             <div class="row">
               <h1>Bedrooms</h1>
-              <Checkbox
-                type="multi"
-                name="Bedrooms"
-                list={['0', '1', '2', '3', '4', '5+']} />
+              <Checkbox type="multi" name="Bedrooms" list={['0', '1', '2', '3', '4', '5+']} />
             </div>
             <div class="row">
               <h1>Bathroom</h1>
-              <Checkbox
-                name="Bathroom"
-                list={['1+', '2+', '3+', '4+', '5+']}
-              />
+              <Checkbox name="Bathroom" list={['1+', '2+', '3+', '4+', '5+']} />
             </div>
             <div class="row">
               <h1>Garage/Parking</h1>
-              <Checkbox
-                list={['1+', '2+', '3+', '4+', '5+']}
-                name="Garage"
-              />
+              <Checkbox list={['1+', '2+', '3+', '4+', '5+']} name="Garage" />
             </div>
-
           </div>
           <div class="panel-foot">
             <div class="btn" onClick={this.clear}>
